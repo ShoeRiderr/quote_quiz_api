@@ -6,6 +6,11 @@ use Src\Support\Router\Router;
 
 $router = new Router(new Request);
 
+/**
+ * To define a route you need to pass route path as first element and callback or array with 
+ * controller path as first element and the name of the controller method as the second.
+ */
+
 //Questions
 $router->get('/questions', [QuestionController::class, 'index']);
 $router->get('/questions-with-answers', [QuestionController::class, 'getWithAnswers']);

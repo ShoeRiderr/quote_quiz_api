@@ -1,5 +1,6 @@
 {
     "require": {
+        "php": "^8.0",
         "vlucas/phpdotenv": "^2.4"
     },
     "autoload": {

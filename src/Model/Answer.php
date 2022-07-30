@@ -4,20 +4,32 @@ declare (strict_types = 1);
 
 namespace Src\Model;
 
+use PDO;
+use PDOException;
+
 class Answer extends BaseModel
 {
-    protected $findAllStatement = "SELECT * FROM answers;";
+    protected $table = 'answers';
 
-    protected $findStatement = "SELECT * FROM answers WHERE id = ?;";
+    protected $fillable = [
+        'content',
+        'question_id',
+        'is_correct',
+    ];
 
-    protected $insertStatement = "INSERT INTO answers (content, question_id, is_correct) VALUES (:content, :question_id, :is_correct);";
+    public function findByQuestionId(int $questionId)
+    {
+        $statement = "SELECT * FROM answers WHERE question_id = :question_id;";
 
-    protected $updateStatement = "UPDATE answers
-        SET
-            content = :content,
-            question_id = :question_id,
-            is_correct = :is_correct
-        WHERE id = :id;";
-
-    protected $deleteStatement = "DELETE FROM answers WHERE id = :id;";
+        try {
+            $statement = $GLOBALS['dbConnection']->prepare($statement);
+            $statement->execute([
+                'question_id' => $questionId,
+            ]);
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
 }

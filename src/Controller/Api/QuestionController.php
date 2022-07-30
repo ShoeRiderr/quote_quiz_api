@@ -17,7 +17,7 @@ class QuestionController
 
             return json_encode($questions);
         } catch (Throwable $e) {
-            var_dump($e);
+            exit($e->getMessage());
         }
     }
 
@@ -25,15 +25,16 @@ class QuestionController
     {
         try {
             $questions = (new Question)->findAll();
-            $questions = array_map(function ($question) {
-                $question['answers'] = Answer::findByQuestionId((int) $question['id']);
+            $answer = new Answer();
+            $questions = array_map(function ($question) use ($answer) {
+                $question['answers'] = $answer->findByQuestionId((int) $question['id']);
 
                 return $question;
             }, $questions);
 
             return json_encode($questions);
         } catch (Throwable $e) {
-            var_dump($e);
+            exit($e->getMessage());
         }
     }
 }
