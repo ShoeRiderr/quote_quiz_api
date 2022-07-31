@@ -1,6 +1,6 @@
 # Ouote quiz api 
 
-This project is backend side for ['This project'](https://github.com/ShoeRiderr/quote-quiz-frontend).
+This project is backend side for [This project](https://github.com/ShoeRiderr/quote-quiz-frontend).
 
 Before starting the project you should create a MySql database, create .env file and copy the .env.example content to it.
 
