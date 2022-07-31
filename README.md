@@ -22,4 +22,4 @@ php -S 127.0.0.1:8000 -t public
 ```
 Below you can find available routes:
 - api/questions : returns all questions without answers
-- api/questions-with-answers : returns questions with answers in random order. you can pass limit as parameter to set limit for number of records to fetch
+- api/questions-with-answers : returns questions in random order with answers. you can pass limit as parameter to set limit for number of records to fetch
