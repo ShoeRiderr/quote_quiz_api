@@ -43,7 +43,7 @@ class BaseModel implements Modelnterface
 
     public function insert(array $input)
     {
-        $statement = "INSERT INTO " . $this->table . " (" . implode(', ', $this->fillable) . ") VALUES (:" .implode(', :', $this->fillable) . ");";
+        $statement = "INSERT INTO " . $this->table . " (" . implode(', ', $this->fillable) . ") VALUES (:" . implode(', :', $this->fillable) . ");";
 
         try {
             $statement = $GLOBALS['dbConnection']->prepare($statement);
@@ -64,7 +64,7 @@ class BaseModel implements Modelnterface
 
         try {
             $statement = $GLOBALS['dbConnection']->prepare($statement);
-            $statement->execute($input);
+            $statement->execute(array_merge(['id' => $id], $input));
             return $statement->rowCount();
         } catch (PDOException $e) {
             exit($e->getMessage());

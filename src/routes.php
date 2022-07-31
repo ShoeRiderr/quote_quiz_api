@@ -12,5 +12,5 @@ $router = new Router(new Request);
  */
 
 //Questions
-$router->get('/questions', [QuestionController::class, 'index']);
-$router->get('/questions-with-answers', [QuestionController::class, 'getWithAnswers']);
+$router->get('/api/questions', [QuestionController::class, 'index']);
+$router->get('/api/questions-with-answers', [QuestionController::class, 'getWithAnswers']);

@@ -23,8 +23,10 @@ class QuestionController
 
     public function getWithAnswers()
     {
+        $limit = $_GET['limit'] ? intval($_GET['limit']) : 10;
+
         try {
-            $questions = (new Question)->findAll();
+            $questions = (new Question)->getInRandomOrder($limit);
             $answer = new Answer();
             $questions = array_map(function ($question) use ($answer) {
                 $question['answers'] = $answer->findByQuestionId((int) $question['id']);
@@ -34,7 +36,7 @@ class QuestionController
 
             return json_encode($questions);
         } catch (Throwable $e) {
-            exit($e->getMessage());
+            return ['error' => $e->getMessage()];
         }
     }
 }

@@ -38,11 +38,12 @@ class Router
     private function formatRoute(string $route)
     {
         $result = rtrim($route, '/');
+
         if ($result === '') {
             return '/';
         }
 
-        return $result;
+        return strpos($result, '?') !== false ? substr($result, 0, strpos($result, '?')) : $result;
     }
 
     private function invalidMethodHandler()
@@ -69,7 +70,7 @@ class Router
             return;
         }
 
-        echo call_user_func_array($method, array($this->request));
+        echo call_user_func_array($method, [$this->request]);
     }
 
     public function __destruct()
