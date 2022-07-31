@@ -39,4 +39,43 @@ class QuestionController
             return ['error' => $e->getMessage()];
         }
     }
+
+    public function create()
+    {
+        try {
+            $question = new Question;
+            $answer = new Answer;
+
+            $question->insert([
+                'content' => $_POST['content'],
+            ]);
+
+            foreach ($_POST['answers'] as $record) {
+                $answer->insert([
+                    'content' => $record['content'],
+                    'question_id' => $question['id'],
+                    'is_correct' => $record['is_correct'],
+                ]);
+            }
+
+            return 'Success!';
+        } catch (Throwable $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
+    public function update($id)
+    {
+        try {
+            $question = new Question;
+
+            $question->update($id, [
+                'content' => $_POST['content'],
+            ]);
+
+            return 'Success!';
+        } catch (Throwable $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
 }

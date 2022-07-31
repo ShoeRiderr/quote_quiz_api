@@ -14,3 +14,5 @@ $router = new Router(new Request);
 //Questions
 $router->get('/api/questions', [QuestionController::class, 'index']);
 $router->get('/api/questions-with-answers', [QuestionController::class, 'getWithAnswers']);
+$router->post('/api/questions', [QuestionController::class, 'create']);
+$router->put('/api/questions/{id}', [QuestionController::class, 'update']);
