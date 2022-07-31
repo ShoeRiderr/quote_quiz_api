@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 namespace Src\Support\Router;
 
 class Router
@@ -43,6 +45,7 @@ class Router
             return '/';
         }
 
+        // remove url params so routes can match to the defined one
         return strpos($result, '?') !== false ? substr($result, 0, strpos($result, '?')) : $result;
     }
 
